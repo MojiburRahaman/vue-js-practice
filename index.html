@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Js</title>
+</head>
+
+<body>
+    <div id="app">{{ message }}</div>
+    <div class="app">
+
+        <input type="text" v-model="name">
+        <br>
+        <span v-if="name" :title="name"> Your Name is :{{ name }}</span>
+
+        <div v-else="name">
+            Name : {{ profile.name }}
+            <br>
+            social : <li v-for="(social ,index) in socials">
+                <a :href="social.link">{{ social.name }}</a> 
+            </li>
+        </div>
+        <br>
+        <button @click="count++">click</button> : {{ count }}
+       
+
+
+
+        <br>
+        <input type="text" name="" id="" v-model="additems">
+        <button @click="additem">Add Item</button>
+        <li v-for="(ar,index) in arr">
+            {{ ar }} <button @click="removearr(index)"> remove</button>
+            <br>
+        </li>
+    </div>
+
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const {
+            createApp
+        } = Vue
+
+        createApp({
+            data() {
+                return {
+                    message: 'Hello Vue!'
+                }
+            }
+        }).mount('#app');
+        createApp({
+            data() {
+                return {
+                    name: '',
+                    count: 0,
+                    age: '18',
+                    html: '<a href="">hELLO</a>',
+                    profile: {
+                        name: 'Mojibur Rahaman',
+
+                    },
+                    socials: [{
+                            name: 'Facebook',
+                            link: 'facebook.com'
+                        },
+                        {
+                            name: 'twitter',
+                            link: 'twitter.com'
+                        },
+                        {
+                            name: 'instagram',
+                            link: 'instagram.com'
+                        },
+                        {
+                            name: 'portfolio',
+                            link: 'mojiburrahaman.com'
+                        },
+                    ],
+                    additems:null,
+                    arr:['a','b','c'],
+
+                }
+            },
+            methods: {
+              additem:function()  {
+              if (this.additems == null) {
+                return;
+              }
+                this.arr.push(this.additems);
+                this.additems =null;
+              },
+              removearr:function(key)  {
+            // alert(key);
+            this.arr.splice(key,1);
+              }
+            },
+        }).mount('.app')
+    </script>
+</body>
+
+</html>
